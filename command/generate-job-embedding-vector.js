@@ -34,7 +34,10 @@ async function generateJobEmbeddingVector() {
         throw new Error('No embedding returned from OpenAI API');
       }
 
-      const embeddingToSql = pgvector.toSql(embedding);
+
+        const norm = Math.sqrt(embedding.reduce((sum, val) => sum + val * val, 0));
+        const normalizedEmbedding = embedding.map(val => val / norm);
+      const embeddingToSql = pgvector.toSql(normalizedEmbedding);
 
       await knex.raw('UPDATE jobs SET embedding_vector = ? WHERE id = ?', [embeddingToSql, job.id]);
 

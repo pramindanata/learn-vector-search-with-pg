@@ -16,7 +16,7 @@ async function recommendJobsForUsers() {
   for (const user of users) {
     // Use raw SQL to get top 3 jobs by vector similarity
     const recommendations = await knex.raw(`
-      SELECT id, role, embedding_vector, 1 - (embedding_vector <#> ?) AS similarity
+      SELECT id, role, embedding_vector, 1 - (embedding_vector <=> ?) AS similarity
       FROM jobs
       WHERE embedding_vector IS NOT NULL
       ORDER BY similarity DESC

@@ -41,7 +41,9 @@ async function generateUserEmbeddingVector() {
       if (!embedding) {
         throw new Error('No embedding returned from OpenAI API');
       }
-      const embeddingToSql = pgvector.toSql(embedding);
+        const norm = Math.sqrt(embedding.reduce((sum, val) => sum + val * val, 0));
+        const normalizedEmbedding = embedding.map(val => val / norm);
+    const embeddingToSql = pgvector.toSql(normalizedEmbedding);
       await knex.raw('UPDATE basic_users SET embedding_vector = ? WHERE id = ?', [embeddingToSql, user.id]);
       console.log(`Updated embedding for user id ${user.id}`);
     } catch (err) {
