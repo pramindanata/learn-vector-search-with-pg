@@ -15,27 +15,26 @@ async function recommendJobsForUsers() {
 
   for (const user of users) {
     // Use raw SQL to get top 3 jobs by vector similarity
-    const recommendations = await knex.raw(`
+    const recommendations = await knex.raw(
+      `
       SELECT id, role, embedding_vector, 1 - (embedding_vector <=> ?) AS similarity
       FROM jobs
       WHERE embedding_vector IS NOT NULL
       ORDER BY similarity DESC
       LIMIT 3
-    `, [user.embedding_vector]);
+    `,
+      [user.embedding_vector],
+    );
 
-    const userRoles = user.work_experiences.map(exp => exp.role)
+    const userRoles = user.work_experiences.map((exp) => exp.role);
     const table = new Table({
       head: ['Job ID', 'Job Role', 'Matchedness'],
-      colWidths: [8, 28, 14]
+      colWidths: [8, 28, 14],
     });
 
-    recommendations.rows.forEach(job => {
+    recommendations.rows.forEach((job) => {
       const percent = (job.similarity * 100).toFixed(2) + '%';
-      table.push([
-        job.id,
-        job.role,
-        percent
-      ]);
+      table.push([job.id, job.role, percent]);
     });
     console.log(`\nUser: ${user.name}`);
     if (userRoles.length > 0) {
