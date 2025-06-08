@@ -60,6 +60,12 @@ exports.seed = async function(knex) {
     { name: 'technical writer' },
     { name: 'product owner' },
     { name: 'release manager' },
-    { name: 'support engineer' }
+    { name: 'support engineer' },
+    { name: 'man' },
+    { name: 'boy' },
+    { name: 'king' },
+    { name: 'woman' },
+    { name: 'girl' },
+    { name: 'queen' },
   ]);
 };
