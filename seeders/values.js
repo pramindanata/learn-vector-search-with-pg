@@ -1,0 +1,65 @@
+/**
+ * @param { import('knex').Knex } knex
+ * @returns { Promise<void> }
+ */
+exports.seed = async function(knex) {
+  await knex('values').del();
+  await knex('values').insert([
+    // Backend-related
+    { name: 'backend engineer' },
+    { name: 'back end engineer' },
+    { name: 'back end developer' },
+    { name: 'software engineer (back end)' },
+    { name: 'software engineer (backend golang)' },
+    { name: 'senior backend developer' },
+    { name: 'backend architect' },
+    { name: 'backend API developer' },
+    { name: 'cloud backend engineer' },
+    { name: 'backend systems engineer' },
+    { name: 'database backend engineer' },
+    { name: 'backend integration engineer' },
+    { name: 'microservices backend engineer' },
+    { name: 'backend devops engineer' },
+    // Other job roles
+    { name: 'frontend engineer' },
+    { name: 'ui/ux designer' },
+    { name: 'qa engineer' },
+    { name: 'mobile developer' },
+    { name: 'product manager' },
+    { name: 'devops engineer' },
+    { name: 'data analyst' },
+    { name: 'project manager' },
+    { name: 'scrum master' },
+    { name: 'customer support specialist' },
+    { name: 'full stack developer' },
+    { name: 'site reliability engineer' },
+    { name: 'test automation engineer' },
+    { name: 'business analyst' },
+    { name: 'network engineer' },
+    { name: 'security analyst' },
+    { name: 'cloud architect' },
+    { name: 'data engineer' },
+    { name: 'machine learning engineer' },
+    { name: 'AI researcher' },
+    { name: 'blockchain developer' },
+    { name: 'game developer' },
+    { name: 'embedded systems engineer' },
+    { name: 'hardware engineer' },
+    { name: 'systems analyst' },
+    { name: 'ERP consultant' },
+    { name: 'SAP specialist' },
+    { name: 'CRM consultant' },
+    { name: 'IT manager' },
+    { name: 'helpdesk technician' },
+    { name: 'web designer' },
+    { name: 'content strategist' },
+    { name: 'SEO specialist' },
+    { name: 'digital marketing manager' },
+    { name: 'social media manager' },
+    { name: 'copywriter' },
+    { name: 'technical writer' },
+    { name: 'product owner' },
+    { name: 'release manager' },
+    { name: 'support engineer' }
+  ]);
+};
